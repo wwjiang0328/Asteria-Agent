@@ -74,25 +74,31 @@ jobs:
       - name: Build HermesX
         run: npm run build -- --target ${{ matrix.triples }}
 
-      - name: Collect artifacts (Windows)
-        if: runner.os == 'Windows'
+      - name: Collect artifacts
+        shell: bash
         run: |
-          mkdir release
-          cp src-tauri/target/${{ matrix.triples }}/release/bundle/nsis/*.exe release/
-          ls -la release/
-
-      - name: Collect artifacts (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          mkdir release
-          cp src-tauri/target/${{ matrix.triples }}/release/bundle/dmg/*.dmg release/ 2>/dev/null || true
-          ls -la release/ || echo "No DMG, checking for .app..."
-          if [ ! "$(ls -A release/)" ]; then
-            APP_DIR=$(find src-tauri/target/${{ matrix.triples }}/release/bundle -name "*.app" -maxdepth 2 -type d | head -1)
-            if [ -n "$APP_DIR" ]; then
-              cd "$(dirname "$APP_DIR")" && zip -r "$GITHUB_WORKSPACE/release/HermesX-${{ matrix.target }}.zip" "$(basename "$APP_DIR")"
+          mkdir -p release
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            find src-tauri/target -name "*.exe" -path "*/bundle/nsis/*" | while read f; do
+              cp "$f" release/
+              echo "Collected: $f"
+            done
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            # DMG
+            find src-tauri/target -name "*.dmg" -path "*/bundle/dmg/*" | while read f; do
+              cp "$f" release/
+              echo "Collected DMG: $f"
+            done
+            # Fallback: zip .app
+            if [ ! "$(ls -A release/ 2>/dev/null)" ]; then
+              APP_DIR=$(find src-tauri/target -name "*.app" -maxdepth 4 -type d | head -1)
+              if [ -n "$APP_DIR" ]; then
+                cd "$(dirname "$APP_DIR")" && zip -r "$GITHUB_WORKSPACE/release/HermesX-${{ matrix.target }}.zip" "$(basename "$APP_DIR")"
+                echo "Zipped .app bundle"
+              fi
             fi
           fi
+          echo "=== Release contents ==="
           ls -la release/
 
       - name: Upload artifact
@@ -122,7 +128,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: release-artifacts
-          merge-multiple: false
+          merge-multiple: true
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -146,10 +152,7 @@ jobs:
             ---
 
             Built with [Tauri](https://tauri.app/) · HermesX © 2026
-          files: |
-            release-artifacts/HermesX-windows-x64/*
-            release-artifacts/HermesX-macos-arm64/*
-            release-artifacts/HermesX-macos-x64/*
+          files: release-artifacts/*
           draft: false
           prerelease: false
         env:
