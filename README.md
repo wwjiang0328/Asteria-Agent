@@ -4,7 +4,6 @@
 
 **桌面 Agent 工作台**
 
-[![Version](https://img.shields.io/badge/version-0.1.2-blue)](package.json)
 [![Tauri](https://img.shields.io/badge/tauri-2-ffc131)](src-tauri/Cargo.toml)
 [![React](https://img.shields.io/badge/react-19-61dafb)](package.json)
 [![TypeScript](https://img.shields.io/badge/typescript-6.0-3178c6)](package.json)
