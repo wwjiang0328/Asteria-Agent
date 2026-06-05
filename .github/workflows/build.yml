@@ -23,9 +23,6 @@ jobs:
           - target: windows-x64
             os: windows-latest
             triples: x86_64-pc-windows-msvc
-          - target: macos-x64
-            os: macos-13
-            triples: x86_64-apple-darwin
           - target: macos-arm64
             os: macos-latest
             triples: aarch64-apple-darwin
@@ -144,7 +141,6 @@ jobs:
             |------|------|
             | 🪟 Windows x64 | `HermesX-windows-x64.exe` |
             | 🍎 macOS Apple Silicon | `HermesX-macos-arm64.dmg` |
-            | 🍎 macOS Intel | `HermesX-macos-x64.dmg` |
 
             > ⚠️ macOS 首次打开若提示&#34;无法验证开发者&#34;，前往 **系统设置 → 隐私与安全性** 中点击&#34;仍要打开&#34;。
             > ⚠️ Windows 安装若 SmartScreen 拦截，点击&#34;更多信息 → 仍要运行&#34;。
