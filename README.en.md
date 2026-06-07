@@ -64,14 +64,24 @@ Security is native-first:
 
 ### Code Indexing & Memory System
 
-Memory is categorized into several data types, not a single chat log table:
+The memory system is a multi-layered data management architecture, not a single chat log table:
 
 - **Code Indexing / RAG**: Scan the selected workspace, chunk and embed files for semantic search and Agent retrieval.
+- **White-box Memory**: Memory entries include type, tags, strength, version, TTL, and source task fields. All memories are viewable, editable, and filterable in the settings panel.
+- **Dream Engine**: Automatically and periodically cleans up expired memories, merges highly similar entries, and archives low-strength stale data. Dream results are visible and support one-click rollback to the previous version.
 - **Lessons Learned**: Extract usage patterns, failure information, and conversation summaries from tool calls and task results.
 - **Project Knowledge**: Record project conventions, tech stack details, and common errors.
-- **User/Agent Memory Snapshots**: Injected as context for subsequent sessions.
+- **Agent Action Diary**: Record agent tool call traces for debugging and pattern analysis.
 
-Go to Settings → Memory → Code Indexing to select a workspace and build an index. Index data is stored in HermesX's local SQLite database, not in the project directory.
+In Settings → Memory System you can:
+
+- View all memory entries (filter by type/tags, edit and delete directly).
+- Select a workspace and build a code index.
+- Manage Dream maintenance parameters (interval, trigger thresholds, etc.).
+- View Dream history and roll back.
+- View retrieval traces and agent action diary.
+
+Index data is written to HermesX's local SQLite database, not to the project directory.
 
 Default database location (Tauri app local data directory):
 
@@ -110,6 +120,18 @@ Built-in presets include:
 - PostgreSQL
 - GSAP
 
+### Long-Running Tasks & Run Management
+
+HermesX handles Hermes Agent task execution with SSE + polling dual-mode:
+
+- **SSE Streaming Execution**: Tasks submitted via `/v1/runs` default to SSE event stream for real-time progress.
+- **Auto-Polling on Disconnect**: When SSE unexpectedly disconnects (network flapping, Agent restart), HermesX automatically switches to polling mode, querying task status every 30 seconds for up to 2 hours.
+- **exitReason Tracking**: Complete recording of task termination reasons (sse_timeout → polling_completed / polling_failed / polling_cancelled), enabling precise debug of disconnection points.
+- **Managed Runs Persistence**: In-flight run records are persisted; status is recoverable after app restart.
+- **Run Sweep**: Periodically cleans up expired and completed run records to prevent data accumulation.
+
+This mechanism transforms HermesX from "short tasks only" to "waiting tens of minutes for long tasks" — users don't need to stare at the screen waiting for results.
+
 ### Desktop Pet
 
 The desktop pet provides task status feedback:
@@ -141,6 +163,10 @@ src/
     ragEngine.ts              Code indexing & semantic search
     crossSessionLearning.ts   Cross-session learning
     workflowEngine.ts         Workflow execution
+    context.ts                Context management & memory versioning
+    addOnlyMemory.ts          White-box memory write & retrieval
+    memoryMaintenance.ts      Dream engine (cleanup/merge)
+    managedRuns.ts            Hermes Run lifecycle & polling
     mcp/                      MCP client & manager
 
   store/                      Zustand state
@@ -157,13 +183,11 @@ src-tauri/
       http.rs                 HTTP/SSE proxy
       memory.rs               Memory database commands
       data.rs                 Local data directory & attachments
-      pty.rs                  Terminal sessions
       watch.rs                File watching
       pet.rs                  Desktop pet commands
     memory.rs                 SQLite memory store
     data_dir.rs               App data directory management
     mcp_server.rs             HermesX local MCP service
-    pty_manager.rs            PTY management
     watch_manager.rs          File watch management
 ```
 
@@ -205,7 +229,7 @@ HermesX's design does not invent concepts from scratch. It consolidates mature p
 | OmniParser | GUI screenshot to structured elements | HermesX's primary path is the accessibility tree; visual parsing can be a future supplement rather than a replacement for native structured context. |
 | WindowsAgentArena | Desktop Agent evaluation dimensions | HermesX's execution panel and log structure preserve data foundations for future task quality assessment. |
 | obra/superpowers | Agent workflow discipline, TDD, planning, review | HermesX's skill system supports on-demand loading of process skills to help Agents maintain execution discipline in complex tasks. |
-| everything-claude-code | Self-debugging, error patterns, verification loop | HermesX includes built-in `agentDebugger`, `verifier`, error patterns, and commit check capabilities. |
+| everything-claude-code | Self-debugging, error patterns, verification loop | HermesX includes built-in `verifier`, `selfHealing`, error patterns, and related check capabilities. |
 
 ## Key Implementation Trade-offs
 
@@ -220,7 +244,6 @@ Current backend modules:
 - `commands/fs.rs`: local filesystem read/write, search, path checking.
 - `commands/http.rs`: model request and SSE request proxy, reducing browser environment constraints.
 - `commands/memory.rs` & `memory.rs`: SQLite memory database, full-text search, tool statistics.
-- `commands/pty.rs` & `pty_manager.rs`: terminal sessions.
 - `commands/watch.rs` & `watch_manager.rs`: file watching.
 - `commands/data.rs` & `data_dir.rs`: app local data directory, attachments, and document storage.
 - `mcp_server.rs`: HermesX local MCP service.
@@ -257,11 +280,13 @@ This structure allows ordinary AI conversations, remote Agent tool requests, wor
 
 ### Memory System & Code Indexing
 
-HermesX's memory is not a single field — it is a combination of multiple data stores:
+HermesX's memory is a combination of multiple data stores, not a single field:
 
-- IndexedDB / persisted state: app config, conversations, user/Agent memory snapshots.
+- Persisted state (`persistedState.ts`): app config, memory maintenance status, Dream history.
+- Context versioning (`context.ts`): memory entries carry version numbers; on write, Jaccard similarity automatically marks older entries as superseded. Supports rollback to any Dream history snapshot.
+- Dream engine (`memoryMaintenance.ts`): runs periodically, supporting three strategies: expiration cleanup, similarity merge, and low-strength archival. Configurable trigger interval, minimum write threshold, and cooldown time.
 - SQLite `memory.db`: code index, lessons learned, conversation summaries, project knowledge, tool statistics.
-- In-memory cache: runtime index, Agent operation state, task result cache.
+- In-memory cache: runtime index, agent action diary, task result cache.
 
 RAG code indexing is performed in `ragEngine.ts`:
 
@@ -292,6 +317,21 @@ Corresponding modules:
 - `multiAgentContext.ts`
 - `conversationTimeline.ts`
 - `agentBriefing.ts`
+
+### Long-Running Run Management & Polling Fallback
+
+HermesX doesn't just "submit a task and wait on a dead SSE stream" — it provides full lifecycle encapsulation of the Hermes Agent `/v1/runs` API:
+
+- **SSE + Polling Dual-Mode**: Default SSE streaming for real-time events; on unexpected disconnect (network flapping, Agent restart), automatically switches to 30-second-interval polling via `GET /v1/runs/:id`.
+- **Phased exitReason**: Distinguishes SSE-phase reasons (`sse_timeout`, `sse_disconnected`) from polling-phase reasons (`polling_completed`, `polling_failed`, `polling_cancelled`). The former is never overwritten by the latter, enabling accurate diagnosis of the actual disconnection cause.
+- **2-Hour Hard Cap**: Polling lasts at most 2 hours (`HERMES_RUN_POLL_MAX_DURATION_MS`), preventing indefinite client polling when the Agent service-side task never terminates.
+- **Managed Runs Persistence**: All run records (running, completed, failed) are persisted, with taskId fallback deduplication and periodic sweep of expired records.
+
+Corresponding modules:
+
+- `src/api/adapters/hermes.ts`: SSE stream, polling loop, exitReason tracking.
+- `src/services/managedRuns.ts`: Run record persistence, deduplication, and sweep.
+- `src/constants.ts`: Timeout and polling interval constants.
 
 ### Workflow Execution Isolation
 
@@ -372,7 +412,7 @@ npm run tauri:dev
 npm run dev:web
 ```
 
-This mode is suitable for debugging the frontend UI. Use the desktop dev environment for features involving Tauri IPC, local files, PTY, desktop pet window, etc.
+This mode is suitable for debugging the frontend UI. Use the desktop dev environment for features involving Tauri IPC, local files, desktop pet window, etc.
 
 ## Build
 
@@ -409,10 +449,14 @@ src-tauri/target/release/bundle/nsis/
 
 ## Tests & Checks
 
+HermesX includes frontend and backend tests:
+
 ```bash
-npm run test
-npm run build:web
+npm run test          # Frontend TypeScript tests (Vitest)
+npm run build:web     # Frontend build check
 ```
+
+Frontend test coverage includes: tool registry, tool executor, path approval, memory writes, memory maintenance, and context management.
 
 Rust check:
 
@@ -430,6 +474,10 @@ Configure Provider in Settings (OpenAI-compatible, Anthropic, Ollama, or custom 
 ### Hermes Instances
 
 Add Hermes instance URLs in Connection settings. Once connected, instances' Agents appear in the collaboration sidebar for `@agent` dispatch.
+
+### Auto-Update
+
+On startup, HermesX automatically connects to the `hermesX-admin` version management platform to check for new releases. The Settings center displays the current version and changelog, with one-click access to download the latest installer.
 
 ### Workspace
 
@@ -486,6 +534,7 @@ Yes. Configure an AI Provider and start asking questions directly in the session
 - Some desktop awareness features depend on OS support and platform adaptation.
 - Stable execution of remote Agents depends on the connection status and interface capabilities of the corresponding Hermes instance.
 - Code indexing currently uses local SQLite storage, suitable for project-level retrieval but not a general-purpose large-scale vector database.
+- In polling mode, tasks wait at most 2 hours; manual re-submission is needed after timeout.
 - Workflow, memory, and MCP modules are still being iterated; configuration formats and interfaces may continue to change.
 
 ## Contributing
