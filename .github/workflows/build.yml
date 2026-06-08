@@ -11,7 +11,7 @@ on:
         required: true
 
 env:
-  HERMESX_REPO: wwjiang0328/hermersX
+  HERMESX_REPO: ${{ secrets.HERMESX_REPO }}
 
 jobs:
   build:
