@@ -95,6 +95,23 @@ jobs:
               fi
             fi
           fi
+          # Rename to canonical form: HermesX-{platform}-{version}.{ext}
+          TAG=${GITHUB_REF#refs/tags/}
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG=${{ github.event.inputs.tag }}
+          fi
+          TAG=${TAG#v}
+          pushd release
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            for f in *.exe; do
+              mv "$f" "HermesX-win-${TAG}.exe" 2>/dev/null || true
+            done
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            for f in *.dmg; do
+              mv "$f" "HermesX-mac-${TAG}.dmg" 2>/dev/null || true
+            done
+          fi
+          popd
           echo "=== Release contents ==="
           ls -la release/
 
@@ -116,10 +133,12 @@ jobs:
         id: tag
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "TAG=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+            TAG=${{ github.event.inputs.tag }}
           else
-            echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+            TAG=${GITHUB_REF#refs/tags/}
           fi
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+          echo "VERSION=${TAG#v}" >> $GITHUB_OUTPUT
 
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -139,8 +158,8 @@ jobs:
 
             | 平台 | 文件 |
             |------|------|
-            | 🪟 Windows x64 | `HermesX-windows-x64.exe` |
-            | 🍎 macOS Apple Silicon | `HermesX-macos-arm64.dmg` |
+            | 🪟 Windows x64 | `HermesX-win-${{ steps.tag.outputs.VERSION }}.exe` |
+            | 🍎 macOS (M1–M4) | `HermesX-mac-${{ steps.tag.outputs.VERSION }}.dmg` |
 
             > ⚠️ macOS 首次打开若提示&#34;无法验证开发者&#34;，前往 **系统设置 → 隐私与安全性** 中点击&#34;仍要打开&#34;。
             > ⚠️ Windows 安装若 SmartScreen 拦截，点击&#34;更多信息 → 仍要运行&#34;。
