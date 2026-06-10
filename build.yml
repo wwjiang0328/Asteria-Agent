@@ -155,30 +155,34 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Sync to Gitee Release
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
         run: |
+          set -e
           TAG="${{ steps.tag.outputs.TAG }}"
+          AUTH="Authorization: Bearer $GITEE_TOKEN"
+          API="https://gitee.com/api/v5/repos/jackmore/open-hermesx"
 
-          # Create or reuse Gitee release
-          RELEASE_RESP=$(curl -s -X POST "https://gitee.com/api/v5/repos/jackmore/open-hermesx/releases" \
-            -H "Content-Type: application/json" \
-            -d "{\"tag_name\":\"$TAG\",\"name\":\"HermesX $TAG\",\"body\":\"HermesX 桌面端 $TAG\\n\\n| 平台 | 文件 |\\n|------|------|\\n| 🪟 Windows | HermesX-win-$TAG.exe |\\n| 🍎 macOS | HermesX-mac-$TAG.dmg |\"}")
+          # Get main SHA for target_commitish
+          SHA=$(curl -s "$API/branches/main" | python3 -c "import json,sys; print(json.load(sys.stdin)['commit']['sha'])")
 
-          RELEASE_ID=$(echo "$RELEASE_RESP" | python3 -c "import json,sys; print(json.load(sys.stdin).get('id',''))")
+          # Create release (ignore error if already exists)
+          BODY="HermesX ${TAG}\\n\\n| Platform | File |\\n|----------|------|\\n| Windows  | HermesX-win-${TAG}.exe |\\n| macOS    | HermesX-mac-${TAG}.dmg |"
+          RESP=$(curl -s -X POST "$API/releases" -H "Content-Type: application/json" -H "$AUTH" \
+            -d "{\"tag_name\":\"$TAG\",\"name\":\"HermesX $TAG\",\"target_commitish\":\"$SHA\",\"body\":\"$BODY\"}")
+          RELEASE_ID=$(echo "$RESP" | python3 -c "import json,sys; print(json.load(sys.stdin).get('id',''))")
 
           if [ -z "$RELEASE_ID" ]; then
-            echo "Release might exist, fetching..."
-            RELEASE_ID=$(curl -s "https://gitee.com/api/v5/repos/jackmore/open-hermesx/releases/tags/$TAG" | python3 -c "import json,sys; print(json.load(sys.stdin).get('id',''))")
+            echo "Fetching existing release..."
+            RELEASE_ID=$(curl -s "$API/releases/tags/$TAG" | python3 -c "import json,sys; print(json.load(sys.stdin).get('id',''))")
           fi
-
           echo "Gitee Release ID: $RELEASE_ID"
 
           # Upload artifacts
           for f in release-artifacts/HermesX-*; do
             [ -f "$f" ] || continue
-            echo "Uploading: $f"
-            curl -s -X POST "https://gitee.com/api/v5/repos/jackmore/open-hermesx/releases/$RELEASE_ID/files" \
-              -F "file=@$f" \
-              -H "Authorization: Bearer ${{ secrets.GITEE_TOKEN }}"
+            echo "Uploading: $(basename $f)"
+            curl -s --max-time 600 -X POST "$API/releases/$RELEASE_ID/files" -F "file=@$f" -H "$AUTH"
+            echo ""
           done
-
           echo "Gitee sync done"
