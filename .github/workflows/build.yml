@@ -81,18 +81,29 @@ jobs:
               echo "Collected: $f"
             done
           elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            # DMG
-            find src-tauri/target -name "*.dmg" -path "*/bundle/dmg/*" | while read f; do
-              cp "$f" release/
-              echo "Collected DMG: $f"
-            done
-            # Fallback: zip .app
-            if [ ! "$(ls -A release/ 2>/dev/null)" ]; then
-              APP_DIR=$(find src-tauri/target -name "*.app" -maxdepth 4 -type d | head -1)
-              if [ -n "$APP_DIR" ]; then
-                cd "$(dirname "$APP_DIR")" && zip -r "$GITHUB_WORKSPACE/release/HermesX-${{ matrix.target }}.zip" "$(basename "$APP_DIR")"
-                echo "Zipped .app bundle"
-              fi
+            # Get version tag for naming
+            TAG=${GITHUB_REF#refs/tags/}
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+              TAG=${{ github.event.inputs.tag }}
+            fi
+            TAG=${TAG#v}
+            # Find .app and ad-hoc sign (eliminates "damaged" Gatekeeper block)
+            APP_DIR=$(find src-tauri/target -name "HermesX.app" -maxdepth 6 -type d | head -1)
+            if [ -n "$APP_DIR" ]; then
+              echo "Ad-hoc signing $APP_DIR..."
+              codesign --force --deep --sign - "$APP_DIR" && echo "Signed OK" || echo "Sign failed (non-fatal)"
+            fi
+            # Create DMG from signed .app
+            mkdir -p release
+            if [ -n "$APP_DIR" ] && [ -d "$APP_DIR" ]; then
+              hdiutil create -volname "HermesX" -srcfolder "$APP_DIR" -ov -format UDZO "release/HermesX-mac-${TAG}.dmg"
+              echo "Created signed DMG: HermesX-mac-${TAG}.dmg"
+            else
+              # Fallback: collect Tauri's original DMG
+              echo "App not found, falling back to Tauri DMG..."
+              find src-tauri/target -name "*.dmg" -path "*/bundle/dmg/*" | while read f; do
+                cp "$f" "release/HermesX-mac-${TAG}.dmg"
+              done
             fi
           fi
           # Rename to canonical form: HermesX-{platform}-{version}.{ext}
@@ -161,7 +172,7 @@ jobs:
             | 🪟 Windows x64 | `HermesX-win-${{ steps.tag.outputs.VERSION }}.exe` |
             | 🍎 macOS (M1–M4) | `HermesX-mac-${{ steps.tag.outputs.VERSION }}.dmg` |
 
-            > ⚠️ macOS 首次打开若提示&#34;无法验证开发者&#34;，前往 **系统设置 → 隐私与安全性** 中点击&#34;仍要打开&#34;。
+            > ⚠️ macOS 首次打开若提示&#34;无法验证开发者&#34;，右键点击 App → 选择&#34;打开&#34;即可。后续可直接双击打开。
             > ⚠️ Windows 安装若 SmartScreen 拦截，点击&#34;更多信息 → 仍要运行&#34;。
 
             ---
