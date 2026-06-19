@@ -184,10 +184,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Gitee sync disabled — uploads to China servers are too slow
-      # - name: Sync to Gitee Release
-      #   env:
-      #     GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
-      #   run: |
-      #     TAG="${{ steps.tag.outputs.TAG }}"
-      #     ...
