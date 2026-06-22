@@ -12,6 +12,18 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.1 (2026-06-22)
+
+From "read-only analysis" to "hands-on action" — this release gives the agent the ability to see and operate your desktop:
+
+- Screen vision & desktop control: capture screenshots, use mouse and keyboard to operate any desktop app or browser — open pages, click buttons, fill forms, launch software, working on-site just like a human
+- Parallel sub-agent collaboration: multiple sub-agents working in parallel around the same context, streaming progress back in real time
+- Windows accessibility hardening: more stable UIA element location and window traversal
+- Deeper browser capture: always-on Console / Network event monitoring for more precise web interaction
+- Permission panel redesign: clearer, more controllable operation permissions
+
+Letting the agent not just "talk", but truly "do".
+
 ### v1.0.0 · Public Beta (2026-06-21)
 
 Polished all the way from 0.x to 1.0.0, HermesX now enters public beta. This release is all about making the agent more autonomous and secure:
@@ -25,15 +37,3 @@ Polished all the way from 0.x to 1.0.0, HermesX now enters public beta. This rel
 - MCP ecosystem: GitHub / PostgreSQL and more plug-and-play tools
 
 Give it a try and tell us what you think. Every piece of feedback makes the full release better.
-
-### v1.0.1 (2026-06-22)
-
-From \"read-only analysis\" to \"hands-on action\" — this release gives the agent the ability to see and operate your desktop:
-
-- Screen vision & desktop control: capture screenshots, use mouse and keyboard to operate any desktop app or browser — open pages, click buttons, fill forms, launch software, working on-site just like a human
-- Parallel sub-agent collaboration: multiple sub-agents working in parallel around the same context, streaming progress back in real time
-- Windows accessibility hardening: more stable UIA element location and window traversal
-- Deeper browser capture: always-on Console / Network event monitoring for more precise web interaction
-- Permission panel redesign: clearer, more controllable operation permissions
-
-Letting the agent not just \"talk\", but truly \"do\".
