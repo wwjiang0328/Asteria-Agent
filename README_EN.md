@@ -12,6 +12,13 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.3 (2026-06-23)
+
+- Image generation: Agent can now generate images and embed them in conversations, with multi-model adapter support
+- Markdown rendering upgrade: inline image display and richer formatting
+- CommandBar interaction improvements
+- HTTP proxy & Provider enhancements
+
 ### v1.0.2 (2026-06-23)
 
 - PPT generation: Agent can now directly produce presentations (HTML Deck + PPTX), from brief to final output in one go
