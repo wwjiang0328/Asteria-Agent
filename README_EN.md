@@ -14,12 +14,13 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ### v1.0.4 (2026-06-24)
 
-- Multi-model image generation: DashScope Qwen image support + expanded adapters, agent can call different models for image output
-- Image gallery redesign: single-image full display + multi-image grid gallery, vastly improved visual experience
+- Browser control breakthrough: numbered interactive elements + action-as-observation (inspired by browser-use), click returns fresh screenshot
+- Browser robustness fixes: blank page fallback, slow render retry, early-stop interception, click→read false-kill fix
+- Conversation title AI summarization: new conversations auto-titled by AI
+- Multi-model image generation: DashScope Qwen image support + expanded adapters
+- Image gallery redesign: single-image full display + multi-image grid gallery
 - Patent disclosure drafter skill: from sketch to patent disclosure, agent generates it in one go
-- Cross-OS command awareness: agent auto-detects system differences for more precise command adaptation
-- Cross-session learning correction: choosing the wrong image model won't become a learned "taboo"
-- Engine panel fix: new tasks no longer carry over stale steps from old runs
+- Cross-OS command awareness + cross-session learning fixes + engine stability
 
 ### v1.0.3 (2026-06-23)
 
