@@ -2,9 +2,9 @@
 
 **A local-first AI workspace hub that lets models go beyond answering, and actually get the work done.**
 
-HermesX understands your goals, gathers scattered context, and autonomously breaks down tasks, orchestrates tools, and reads and writes files, surfacing every step of progress in plain sight so ideas, information, and results flow together in one space.
+HermesX understands your goals, gathers scattered context, and autonomously breaks down tasks and orchestrates tools — reading and writing files, running commands, searching the web, operating the browser and your desktop, seeing the screen and producing images and presentations — surfacing every step of progress in plain sight so ideas, information, and results flow together in one space.
 
-Just describe the outcome you want. HermesX brings order to your conversations, files, and tasks, converging complex work into a process that is trackable, controllable, and ready to deliver. You set the direction; it drives execution and lands the result. What you get back is not a single answer, but a complete deliverable you can open, locate, and review. Data and execution stay local, so safety and control remain firmly on your side.
+Just describe the outcome you want. HermesX brings order to your conversations, files, and tasks, converging complex work into a process that is trackable, controllable, and ready to deliver. You set the direction; it drives execution and lands the result. What you get back is not a single answer, but a complete deliverable you can open, locate, and review. It also remembers your preferences and long-standing conventions, getting to know you better over time so you don't start from scratch each session. Data and execution stay local, so safety and control remain firmly on your side.
 
 > Download: [hermesx.jackcloud.online](https://hermesx.jackcloud.online)
 
@@ -14,8 +14,10 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ### v1.0.5 (2026-06-24)
 
-- New `remember` tool: Agent can now remember your preferences across sessions — no more repeating yourself
-- About page capability text upgrade: clearer display of agent's true capabilities
+- New `remember` tool: the agent finally remembers your preferences — how to address you, your habits, long-standing conventions — carried across sessions, so you never repeat yourself
+- More honest browser input: typing into a link or button no longer reports false success; it points to the actually-editable field and self-corrects
+- No internal mechanics in chat: replies talk results and progress only — no element indices or selectors leaking through
+- About page capability text upgrade: core capabilities reordered by what it can really do, clearer on the agent's true boundaries
 
 ### v1.0.4 (2026-06-24)
 
