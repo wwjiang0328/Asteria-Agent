@@ -12,6 +12,11 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.5 (2026-06-24)
+
+- New `remember` tool: Agent can now remember your preferences across sessions — no more repeating yourself
+- About page capability text upgrade: clearer display of agent's true capabilities
+
 ### v1.0.4 (2026-06-24)
 
 - Browser control breakthrough: numbered interactive elements + action-as-observation (inspired by browser-use), click returns fresh screenshot
