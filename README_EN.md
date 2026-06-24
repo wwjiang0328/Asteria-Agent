@@ -12,6 +12,15 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.4 (2026-06-24)
+
+- Multi-model image generation: DashScope Qwen image support + expanded adapters, agent can call different models for image output
+- Image gallery redesign: single-image full display + multi-image grid gallery, vastly improved visual experience
+- Patent disclosure drafter skill: from sketch to patent disclosure, agent generates it in one go
+- Cross-OS command awareness: agent auto-detects system differences for more precise command adaptation
+- Cross-session learning correction: choosing the wrong image model won't become a learned "taboo"
+- Engine panel fix: new tasks no longer carry over stale steps from old runs
+
 ### v1.0.3 (2026-06-23)
 
 - Image generation: Agent can now generate images and embed them in conversations, with multi-model adapter support
