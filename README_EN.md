@@ -12,6 +12,10 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.7 (2026-06-25)
+
+- Fixed three Mac real-device bugs: path backslash normalization, DeepSeek reasoning_effort param, presentation deck title rendering
+
 ### v1.0.6 (2026-06-25)
 
 - PPT slide visual overhaul: universal icon library, 3D card/blueprint layouts, hub-centered composition, background glows, 3D icon badges
