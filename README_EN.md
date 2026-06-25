@@ -12,6 +12,15 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.6 (2026-06-25)
+
+- PPT slide visual overhaul: universal icon library, 3D card/blueprint layouts, hub-centered composition, background glows, 3D icon badges
+- Bar chart multi-series grouping + legend, automatic data tolerance (multiple data formats)
+- Presentation QA self-healing + narrower guards: auto-corrects weak model iterations instead of spinning in loops
+- Humanized error messages: balance/empty-response errors shown in plain language, no raw JSON leaks
+- Long-session scroll fix: auto-scroll to bottom even during thinking, new messages no longer hidden
+- Academic icon expansion (flask/literature/dataset etc.), page limit raised to 30
+
 ### v1.0.5 (2026-06-24)
 
 - New `remember` tool: the agent finally remembers your preferences — how to address you, your habits, long-standing conventions — carried across sessions, so you never repeat yourself
