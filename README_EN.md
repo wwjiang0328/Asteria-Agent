@@ -14,13 +14,14 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ### v1.0.8 (2026-06-26)
 
-- Search engine overhaul: Chinese Bing search + DuckDuckGo fallback, Bing instant answer cards, noise filtering
-- Browser observation enhanced: "visible key data" channel, JS widget data preserved from readability drops
-- show_image tool: inline local image display in chat, instant screenshot visibility
-- Screenshot fixes: app-local storage for always-readable files; pre-capture hint "activate target window first"
-- Anti-fake-completion: narrowed resume triggers + objective-gate checks, no more false "done"
-- Approval card streamlined: three-option (allow/deny/always allow), no more repeated prompts
-- Smart-agent dispatch de-hard-limited + System32 PATH fix + 4 new presentation themes
+- Zhiyou first-person replies: streaming responses flow directly into chat bubbles, like the user themself — no more "thinking how to reply"
+- 12 Zodiac avatar system: 12 zodiac-themed avatars, no-jitter avatar bar, show only Zhiyou names (hide tool names)
+- Zhiyou capability parity with direct chat: visible sub-agents, early-stop false-negative fix
+- Search engine overhaul: Chinese Bing + DuckDuckGo fallback, Bing instant answer cards, noise filtering
+- Browser observation: "visible key data" channel, JS widget data preserved from readability drops
+- show_image tool + screenshot fixes: app-local storage for always-readable files, pre-capture window activation hint
+- Anti-fake-completion: narrowed resume triggers + objective-gate checks + routing fix for self-identity queries
+- Streamlined approval (3-option) + colloquial chat tone + System32 PATH fix + 4 new presentation themes
 
 ### v1.0.7 (2026-06-25)
 
