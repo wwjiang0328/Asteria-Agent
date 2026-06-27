@@ -6,7 +6,7 @@ HermesX 理解你的目标，接住散落的上下文，自主拆解任务、调
 
 你只需说出想要抵达的结果，它便在对话、文件与任务之间建立秩序，把复杂工作收敛为可追踪、可掌控、可交付的过程。你负责判断方向，它负责推进落地；最终交付的不只是一段答案，而是一份可打开、可定位、可复盘的成品。它还会记住你的偏好与长期约定，越用越懂你，不必每次从零讲起；数据与执行皆在本地完成，安全与掌控，始终在你这一侧。
 
-> 下载地址：[hermesx.jackcloud.online](https://hermesx.jackcloud.online)
+> 下载地址：[asteria.jackcloud.online](https://asteria.jackcloud.online)
 
 ## 版本日志
 
