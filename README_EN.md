@@ -12,6 +12,15 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.1 (2026-06-29)
+
+Major browser operation upgrade, aligned with browser-use:
+
+- Universal browser operations: added 20+ commands including form filling, keyboard input, scroll control, screenshot capture
+- Tool registry upgrade: new browser-specific tools (click/fill/scroll/screenshot) with unified dispatch interface
+- Prompt enhancement: agent system prompt now includes browser operation routines and error recovery guidance
+- Context tracking: more precise runtime context in Agent Turn
+
 ### v1.0.0 (2026-06-29)
 
 From HermesX to Asteria, a fresh start:
