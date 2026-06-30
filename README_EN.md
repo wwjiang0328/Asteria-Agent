@@ -12,6 +12,17 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.2 (2026-06-30)
+
+Interaction fixes & UI refinements:
+
+- Agent mention routing fix, delegation collaboration polish
+- Artifact display panel refinements for more stable loading & rendering
+- Cursor zone customization: adjustable input/output panel ratio
+- Top bar interaction polish: smoother model switching & session management
+- Empty state branding: polished first-launch experience
+- Setup wizard copy improvements for clearer onboarding
+
 ### v1.0.1 (2026-06-29)
 
 Major browser operation upgrade:
