@@ -12,6 +12,16 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.3 (2026-06-30)
+
+Session UX & orchestration engine improvements:
+
+- Session & engine panel interaction overhaul
+- Tool execution engine refactored with more robust orchestration
+- Artifact lifecycle management: auto-cleanup of stale artifacts to prevent disk bloat
+- Real-time model availability detection for more reliable model switching
+- Enhanced project verification with broader pre-launch checks
+
 ### v1.0.2 (2026-06-30)
 
 Interaction fixes & UI refinements:
