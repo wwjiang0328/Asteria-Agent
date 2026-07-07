@@ -12,6 +12,16 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.4 (2026-07-07)
+
+Engine panel enhancements & sub-agent improvements:
+
+- Engine panel: multi-tool naming, single delegation collaboration, sub-task badges
+- Sub-agent run artifacts now returned to session area, long commands hint background execution
+- Task panel framework transparency, native tool name leakage eliminated
+- Fixed model generation instructions incorrectly used as conversation titles
+- Build target converged to NSIS
+
 ### v1.0.3 (2026-06-30)
 
 Session UX & orchestration engine improvements:
