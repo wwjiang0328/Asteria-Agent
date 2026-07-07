@@ -12,6 +12,14 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.0.5 (2026-07-07)
+
+Patent disclosure drafting skill enhancements:
+
+- Claims layout optimization with multi-type claim structure support
+- Intelligent drafting perspective switching for different patent strategies
+- Drawing compliance validation ensuring specification figure standards
+
 ### v1.0.4 (2026-07-07)
 
 Engine panel enhancements & sub-agent improvements:
