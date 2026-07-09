@@ -12,6 +12,20 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.0 (2026-07-09)
+
+- Claude-Code style execution transcripts with verbatim echo and honest tool-segment folding
+- Engine panel captures model reasoning stream for real-time verbose progress display
+- Eliminated all first-person template phrasing for a more natural panel tone
+- Engine panel tasks/swimlanes now isolated per session to prevent cross-session crosstalk
+- Sub-task badges now show agent/child role labels; progress step counting no longer stuck
+- Web search content filtered by class/id to strip ads, sidebars, and social noise
+- Nudge fix: completion declarations and checklist colons no longer falsely trigger continuation
+- Todo fix: zero-progress tasks not counted; pending→completed skip now flagged honestly
+- Cross-session learning enhanced with existence checks; recoverable failures no longer misrecorded
+- Mermaid CJK diagram rendering fallback fix
+- Guizang material illustration skill for auto-generating patent disclosure diagrams
+
 ### v1.0.5 (2026-07-07)
 
 Patent disclosure drafting skill enhancements:
