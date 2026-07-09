@@ -14,74 +14,37 @@ Just describe the outcome you want. HermesX brings order to your conversations, 
 
 ### v1.1.0 (2026-07-09)
 
-- Claude-Code style execution transcripts with verbatim echo and honest tool-segment folding
-- Engine panel captures model reasoning stream for real-time verbose progress display
-- Eliminated all first-person template phrasing for a more natural panel tone
-- Engine panel tasks/swimlanes now isolated per session to prevent cross-session crosstalk
-- Sub-task badges now show agent/child role labels; progress step counting no longer stuck
-- Web search content filtered by class/id to strip ads, sidebars, and social noise
-- Nudge fix: completion declarations and checklist colons no longer falsely trigger continuation
-- Todo fix: zero-progress tasks not counted; pending→completed skip now flagged honestly
-- Cross-session learning enhanced with existence checks; recoverable failures no longer misrecorded
-- Mermaid CJK diagram rendering fallback fix
-- Guizang material illustration skill for auto-generating patent disclosure diagrams
+- More transparent execution: every Agent action is now clearly visible
+- Livelier engine panel: real-time progress updates with a more natural tone
+- Isolated multi-tasking: different sessions run independently without interference
+- Cleaner search results: ads and irrelevant content automatically filtered
+- Honest task tracking: stalls reported truthfully, skipped steps no longer silently glossed over
+- Smarter cross-session memory: remembers what matters, forgets what doesn't
+- New Guizang illustration skill: auto-generate diagrams for patent disclosures and more
 
 ### v1.0.5 (2026-07-07)
 
-Patent disclosure drafting skill enhancements:
-
-- Claims layout optimization with multi-type claim structure support
-- Intelligent drafting perspective switching for different patent strategies
-- Drawing compliance validation ensuring specification figure standards
+- Smarter patent drafting: auto claims layout, perspective switching, and drawing validation
 
 ### v1.0.4 (2026-07-07)
 
-Engine panel enhancements & sub-agent improvements:
-
-- Engine panel: multi-tool naming, single delegation collaboration, sub-task badges
-- Sub-agent run artifacts now returned to session area, long commands hint background execution
-- Task panel framework transparency, native tool name leakage eliminated
-- Fixed model generation instructions incorrectly used as conversation titles
-- Build target converged to NSIS
+- More intuitive engine panel: task progress at a glance, automatic sub-task scheduling
+- Smoother sub-agent collaboration: results auto-returned, long tasks processed in background
 
 ### v1.0.3 (2026-06-30)
 
-Session UX & orchestration engine improvements:
-
-- Session & engine panel interaction overhaul
-- Tool execution engine refactored with more robust orchestration
-- Artifact lifecycle management: auto-cleanup of stale artifacts to prevent disk bloat
-- Real-time model availability detection for more reliable model switching
-- Enhanced project verification with broader pre-launch checks
+- Polished overall experience: smoother session switching, more stable tool orchestration
+- Auto-cleanup of stale files to prevent disk clutter
 
 ### v1.0.2 (2026-06-30)
 
-Interaction fixes & UI refinements:
-
-- Agent mention routing fix, delegation collaboration polish
-- Artifact display panel refinements for more stable loading & rendering
-- Cursor zone customization: adjustable input/output panel ratio
-- Top bar interaction polish: smoother model switching & session management
-- Empty state branding: polished first-launch experience
-- Setup wizard copy improvements for clearer onboarding
+- UI refinements: improved task collaboration, file preview, and panel layout
+- More polished first-launch experience with clearer onboarding
 
 ### v1.0.1 (2026-06-29)
 
-Major browser operation upgrade:
-
-- Universal browser operations: added 20+ commands including form filling, keyboard input, scroll control, screenshot capture
-- Tool registry upgrade: new browser-specific tools (click/fill/scroll/screenshot) with unified dispatch interface
-- Prompt enhancement: agent system prompt now includes browser operation routines and error recovery guidance
-- Context tracking: more precise runtime context in Agent Turn
+- Major browser control upgrade: form filling, keyboard input, scroll capture, and more
 
 ### v1.0.0 (2026-06-29)
 
-From HermesX to Asteria, a fresh start:
-
-- Rebrand: HermesX → Asteria, all-new visual identity and avatar system
-- Domain migration: asteria.jackcloud.online, download and update services fully switched
-- Clean restart: removed all legacy data migration code, starting lean
-- Built-in skills reorganization: optimized skill source structure for stable loading
-- Agent reply placeholder refinement: smoother conversation flow
-- UI polish: refreshed brand colors, icons, and typography
-- Resource filtering: auto-exclude source files (.ts/.py/.rs etc.) from packaged skills to prevent source leakage
+- Brand new Asteria launch: fresh identity, new domain, clean start
