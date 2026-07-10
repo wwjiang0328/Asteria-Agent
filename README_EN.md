@@ -12,6 +12,14 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.1 (2026-07-10)
+
+- More reliable browser control: blank pages auto-retry, clicks properly open new tabs
+- Long tasks stay on track: scheduler self-heals, recovers from stalls automatically
+- Smarter after each turn: auto-reflects and remembers key findings for next time
+- Stream won't hang: auto-reconnects when the model goes idle
+- File safety net: auto-snapshots before editing, mistakes can be rolled back
+
 ### v1.1.0 (2026-07-09)
 
 - More transparent execution: every Agent action is now clearly visible
