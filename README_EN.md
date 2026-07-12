@@ -12,6 +12,15 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.3 (2026-07-13)
+
+- More accurate Chinese search and memory recall
+- Browser now supports file uploads and saving pages as PDF
+- Background engine more stable, won't sleep unexpectedly
+- Crash recovery: resume from checkpoints, no lost execution logs
+- More transparent: all internal Agent operations now visible
+- Model switch won't interrupt reasoning, sub-task results flow back correctly
+
 ### v1.1.2 (2026-07-10)
 
 - Natural file sorting: numbers sort correctly, b10 no longer appears before b2
