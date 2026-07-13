@@ -12,6 +12,15 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.4 (2026-07-13)
+
+- Unfinished tasks resume automatically: Agent remembers what it was doing
+- Smarter search: Chinese queries and real-time answers use browser search first
+- Write-then-verify: code changes auto-checked, fewer bugs
+- Data security: encrypted API key storage, full backup and restore
+- Crash transparency: failure reasons clearly surfaced
+- Better first-run: onboarding guide, smoother startup and UI
+
 ### v1.1.3 (2026-07-13)
 
 - More accurate Chinese search and memory recall
