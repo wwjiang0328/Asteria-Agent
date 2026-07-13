@@ -12,6 +12,11 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.5 (2026-07-13)
+
+- Installer integrity verifiable, tamper-proof
+- Leaner app: removed legacy compatibility code
+
 ### v1.1.4 (2026-07-13)
 
 - Unfinished tasks resume automatically: Agent remembers what it was doing
