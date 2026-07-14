@@ -12,6 +12,15 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.7 (2026-07-14)
+
+- Cleaner onboarding: welcome cards simplified, showing only proven capabilities
+- More stable: long-running tasks no longer killed by timeouts, crash recovery improved
+- Smarter tool execution: no more skipped steps, results always delivered
+- More reliable connectivity: broken streams auto-reconnect, output never truncated
+- Honest evaluations: tasks no longer auto-marked as complete
+- Cleaner browser sessions: no more ghost processes left behind
+
 ### v1.1.6 (2026-07-14)
 
 - Backup/restore page redesigned with a cleaner, more intuitive layout
