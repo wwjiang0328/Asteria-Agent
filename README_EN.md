@@ -12,6 +12,14 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.2.0 (2026-07-15)
+
+- macOS officially supported: permissions, sandbox, shortcuts fully adapted to feel native
+- Security upgrade: tiered tool permissions, sensitive ops require confirmation, path access control
+- Update service: stricter signature verification, more reliable auto-update
+- Smarter desktop pet: draggable, more natural interactions
+- Workflow editor: fixed undo/redo and operation rollback logic
+
 ### v1.1.8 (2026-07-14)
 
 - Fixed regressions from the previous release: visual verification and panel reasoning restored
