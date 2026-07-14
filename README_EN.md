@@ -12,6 +12,11 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.6 (2026-07-14)
+
+- Backup/restore page redesigned with a cleaner, more intuitive layout
+- Settings and About page visual fixes for a polished look
+
 ### v1.1.5 (2026-07-13)
 
 - Installer integrity verifiable, tamper-proof
