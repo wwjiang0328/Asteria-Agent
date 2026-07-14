@@ -12,6 +12,13 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.1.8 (2026-07-14)
+
+- Fixed regressions from the previous release: visual verification and panel reasoning restored
+- Pet settings now adapt to different window sizes with a more flexible layout
+- Cleaner settings: backup and system info merged into one page
+- More accurate task verification, smoother interruption recovery
+
 ### v1.1.7 (2026-07-14)
 
 - Cleaner onboarding: welcome cards simplified, showing only proven capabilities
