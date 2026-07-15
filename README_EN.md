@@ -12,6 +12,12 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.2.1 (2026-07-15)
+
+- Fixed search serialization to prevent concurrent requests from being blocked by anti-crawl
+- Fixed resume fidelity: tasks no longer lose goals on restart, checkpoint accuracy improved
+- Fixed tool approval path extraction: PPT preview and image processing now work without a workspace
+
 ### v1.2.0 (2026-07-15)
 
 - macOS officially supported: permissions, sandbox, shortcuts fully adapted to feel native
