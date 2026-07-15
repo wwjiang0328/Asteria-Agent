@@ -12,6 +12,13 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.2.2 (2026-07-16)
+
+- Task completed badge on taskbar/Dock icon, so you know it's done even when away
+- Final reply is now a real delivery slip, not a time-ordered replay of run logs
+- File paths + line numbers are clickable anchors; play-by-play commentary explains decisions (matching Codex delivery format)
+- Fixed CDP browser crash recovery bubble
+
 ### v1.2.1 (2026-07-15)
 
 - Fixed search serialization to prevent concurrent requests from being blocked by anti-crawl
