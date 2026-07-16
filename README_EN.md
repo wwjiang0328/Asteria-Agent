@@ -12,6 +12,12 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.2.3 (2026-07-16)
+
+- Pre-release health check: security, data, and durability fixes
+- Companion bubble aligned with main AI delivery format, stop flow fully connected
+- Execution engine stability: path approval, tool execution, and compression strategy optimized
+
 ### v1.2.2 (2026-07-16)
 
 - Task completed badge on taskbar/Dock icon, so you know it's done even when away
