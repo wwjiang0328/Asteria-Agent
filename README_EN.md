@@ -12,6 +12,12 @@ Just describe the outcome you want. Asteria brings order to your conversations, 
 
 ## Changelog
 
+### v1.3.0 (2026-07-17)
+
+- New "Account" tab in Settings: email verification code sign-up/login, session keys stored in secret vault
+- Product self-knowledge skill: no more made-up answers about how to use Asteria, with a quick-reference card injected
+- Account page redesigned in product design language, supporting both light and dark themes
+
 ### v1.2.3 (2026-07-16)
 
 - Pre-release health check: security, data, and durability fixes
